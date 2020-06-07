@@ -2,9 +2,10 @@
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
-import io.reactivex.CompletableObserver
+import com.pluralsight.rxjava2.utility.subscribers.onComplete
+import com.pluralsight.rxjava2.utility.subscribers.onError
+import com.pluralsight.rxjava2.utility.subscribers.onSubscribe
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 import kotlin.system.exitProcess
 
 
@@ -13,24 +14,12 @@ fun main() {
     Observable.fromArray(*GreekAlphabet.greekLetters)
             .doOnNext { log.info("DoOnNext : $it") }
             .ignoreElements()
-            .also {
-                it.subscribe(
-                        object : CompletableObserver {
-                            override fun onComplete() {
-                                log.info("OnComplete")
-                                gate.openGate("OnComplete")
-                            }
-
-                            override fun onSubscribe(d: Disposable) {
-                                log.info("OnSubscribe")
-                            }
-
-                            override fun onError(e: Throwable) {
-                                log.error(e.message)
-                                gate.openGate("OnError")
-                            }
-
-                        }
+            .also { completable ->
+                completable.doOnSubscribe {
+                    com.pluralsight.rxjava2.module2.gate.onSubscribe()
+                }.subscribe(
+                        { com.pluralsight.rxjava2.module2.gate.onComplete() },
+                        { com.pluralsight.rxjava2.module2.gate.onError(it) }
                 )
             }
     gate.waitForAny("onComplete", "OnError")

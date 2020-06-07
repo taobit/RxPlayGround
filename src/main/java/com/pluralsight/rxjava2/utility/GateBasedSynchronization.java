@@ -1,7 +1,6 @@
 package com.pluralsight.rxjava2.utility;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.pluralsight.rxjava2.module2.UtilsKt;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,8 +8,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class GateBasedSynchronization {
-
-    private static Logger log = LoggerFactory.getLogger(GateBasedSynchronization.class);
 
     // HashSet of gate names that have been opened.
     private HashSet<String> openGateNames;
@@ -30,7 +27,7 @@ public class GateBasedSynchronization {
             }
         }
         catch (InterruptedException e) {
-            log.warn(String.format( "InterruptedException while waiting for gate '%1$s'", gateName), e);
+            UtilsKt.log.warn(String.format("InterruptedException while waiting for gate '%1$s'", gateName), e);
         }
     }
 
@@ -50,7 +47,7 @@ public class GateBasedSynchronization {
         }
         catch (InterruptedException e) {
             String gateNameList = generateGateNameList(searchGateNames);
-            log.warn(String.format( "InterruptedException while waiting for gate(s) '%1$s'", gateNameList), e);
+            UtilsKt.log.warn(String.format("InterruptedException while waiting for gate(s) '%1$s'", gateNameList), e);
         }
     }
 
@@ -76,7 +73,7 @@ public class GateBasedSynchronization {
         }
         catch (InterruptedException e) {
             String gateNameList = generateGateNameList(searchGateNames);
-            log.warn(String.format( "InterruptedException while waiting for gate(s) '%1$s'", gateNameList), e);
+            UtilsKt.log.warn(String.format("InterruptedException while waiting for gate(s) '%1$s'", gateNameList), e);
         }
     }
 
@@ -96,7 +93,7 @@ public class GateBasedSynchronization {
         }
         catch (InterruptedException e) {
             String gateNameList = generateGateNameList(searchGateNames);
-            log.warn(String.format( "InterruptedException while waiting for gate(s) '%1$s'", gateNameList), e);
+            UtilsKt.log.warn(String.format("InterruptedException while waiting for gate(s) '%1$s'", gateNameList), e);
         }
     }
 

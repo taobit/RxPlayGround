@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 
 object Utils
 
+@JvmField
 val log: Logger = LoggerFactory.getLogger(Utils.javaClass)
 val gate = GateBasedSynchronization()
 fun runCode(name: String, function: () -> Unit) {
