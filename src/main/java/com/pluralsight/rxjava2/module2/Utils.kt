@@ -1,0 +1,16 @@
+package com.pluralsight.rxjava2.module2
+
+import com.pluralsight.rxjava2.utility.GateBasedSynchronization
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+object Utils
+
+val log: Logger = LoggerFactory.getLogger(Utils.javaClass)
+val gate = GateBasedSynchronization()
+fun runCode(name: String, function: () -> Unit) {
+    log.info("---------------------")
+    log.info(name + "\n")
+    function.invoke()
+    log.info("\n\n")
+}
