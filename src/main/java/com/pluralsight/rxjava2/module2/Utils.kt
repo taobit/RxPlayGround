@@ -8,6 +8,7 @@ object Utils
 
 @JvmField
 val log: Logger = LoggerFactory.getLogger(Utils.javaClass)
+// keep thread running until finish all test
 val gate = GateBasedSynchronization()
 fun runCode(name: String, function: () -> Unit) {
     log.info("---------------------")

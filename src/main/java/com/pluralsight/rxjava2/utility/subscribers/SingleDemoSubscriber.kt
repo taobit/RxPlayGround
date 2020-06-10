@@ -6,24 +6,19 @@ import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 
 class SingleDemoSubscriber<TEvent> @JvmOverloads constructor(
-        private val gate: GateBasedSynchronization = GateBasedSynchronization(),
-        private val errorGateName: String = "onError",
-        private val successGateName: String = "onSuccess"
+        private val gate: GateBasedSynchronization = GateBasedSynchronization()
 ) : SingleObserver<TEvent> {
 
     override fun onSuccess(t: TEvent) {
-        log.info("onSuccess : $t")
-        gate.openGate(successGateName)
+        (t as? Any)?.let { gate.onSuccess(it) }
     }
 
     override fun onSubscribe(d: Disposable) {
-        log.info("onSubscribe")
+        gate.onSubscribe()
     }
 
     override fun onError(e: Throwable) {
-        log.error("onError : ${e.message}")
-        log.error(e.message, e)
-        gate.openGate(errorGateName)
+        gate.onError(e)
     }
 
 }

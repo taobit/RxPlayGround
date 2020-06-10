@@ -43,8 +43,8 @@ public class DemoModule1CardinalityExample {
         // --------------------------------------------------------------------------------------
         // See what happens with the events when we subscribe to each of them...
         // --------------------------------------------------------------------------------------
-        log.info( "Single -----------------------------------------------------");
-        firstGreekLetterOnly.subscribe(new SingleDemoSubscriber<>(gate, "onError", "onSuccess"));
+        log.info("Single -----------------------------------------------------");
+        firstGreekLetterOnly.subscribe(new SingleDemoSubscriber<>(gate));
 
         log.info( "------------------------------------------------------------");
         log.info( "" );

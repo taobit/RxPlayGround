@@ -9,9 +9,7 @@ import java.util.concurrent.TimeUnit
 class DemoSubscriber<TEvent> @JvmOverloads constructor(
         private val gates: GateBasedSynchronization = GateBasedSynchronization(),
         private val onNextDelayDuration: Long = 0L,
-        private val onNextDelayTimeUnit: TimeUnit = TimeUnit.SECONDS,
-        private val errorGateName: String = "onError",
-        private val completeGateName: String = "onComplete"
+        private val onNextDelayTimeUnit: TimeUnit = TimeUnit.SECONDS
 ) : ResourceObserver<TEvent>() {
 
     override fun onNext(event: TEvent) {
@@ -24,12 +22,10 @@ class DemoSubscriber<TEvent> @JvmOverloads constructor(
     }
 
     override fun onError(e: Throwable) {
-        log.error("onError - {}", e.message)
-        gates.openGate(errorGateName)
+        gates.onError(e)
     }
 
     override fun onComplete() {
-        log.info("onComplete")
-        gates.openGate(completeGateName)
+        gates.onComplete()
     }
 }

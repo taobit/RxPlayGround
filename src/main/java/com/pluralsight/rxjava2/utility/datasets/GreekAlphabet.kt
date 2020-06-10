@@ -121,8 +121,7 @@ object GreekAlphabet {
         // Subscribe to the returnObservable the PublishSubject.
         // We don't want this on a separate thread...we want the generating
         // observable and the publish subject to be tied together.
-        returnObservable
-                .subscribe(publishSubject)
+        returnObservable.subscribe(publishSubject)
 
         // Return the PublishSubject, set to observeOn its own thread.
         // Note that we are returning it as an Observable<String>.
