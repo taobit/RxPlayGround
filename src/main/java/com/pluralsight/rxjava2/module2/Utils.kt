@@ -8,11 +8,16 @@ object Utils
 
 @JvmField
 val log: Logger = LoggerFactory.getLogger(Utils.javaClass)
+
+fun logNext(message: String) = log.info("onNext : $message")
+fun logError(throwable: Throwable) = log.error("onError : ${throwable.message}")
+
 // keep thread running until finish all test
 val gate = GateBasedSynchronization()
 fun runCode(name: String, function: () -> Unit) {
+    log.info("*********************")
+    log.info(name)
     log.info("---------------------")
-    log.info(name + "\n")
     function.invoke()
-    log.info("\n\n")
+    log.info("*********************\n")
 }
