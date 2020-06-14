@@ -23,7 +23,7 @@ fun main() {
         gate.waitForAny("onComplete", "onError")
     }
     gate.resetAll()
-    runCode("") {
+    runCode("timeout emits the \"timeout\" onError on the computation thread pool") {
         Observable.create<String> {
             sleep(1, TimeUnit.DAYS)
             GreekAlphabet.greekLettersInEnglish.forEach { letter ->
