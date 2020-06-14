@@ -4,7 +4,9 @@ import com.pluralsight.rxjava2.utility.MutableReference;
 import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.events.EventBase;
 import com.pluralsight.rxjava2.utility.events.NewCommentPostedEvent;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Supplier;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -22,17 +24,16 @@ public class CommentServiceEventObservable {
     public static Observable<EventBase> commentServiceEventGenerator() {
 
         return Observable.generate(
-                () -> new MutableReference<Integer>(0),
+                (@NonNull Supplier<MutableReference<Integer>>) MutableReference::new,
                 (offset, eventBaseEmitter) -> {
 
                     // Make sure we haven't run off the end of our list.
-                    if( offset.getValue() >= authorEmails.length) {
+                    if (offset.getValue() >= authorEmails.length) {
 
                         // We have sent all the messages...send the
                         // onComplete event.
                         eventBaseEmitter.onComplete();
-                    }
-                    else {
+                    } else {
 
                         int nextValue = (offset.getValue() + 1) % authorEmails.length;
 
@@ -40,7 +41,7 @@ public class CommentServiceEventObservable {
                         eventBaseEmitter.onNext(new NewCommentPostedEvent(
                                 authorEmails[offset.getValue()],
                                 authorEmails[nextValue],
-                                randomString(64)
+                                randomString()
                         ));
                     }
 
@@ -52,15 +53,15 @@ public class CommentServiceEventObservable {
                 });
         }
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    private static String randomString(int characterCount) {
+    private static String randomString() {
 
         String letters = "abcdefghijklmnopqrstuvwxyz ";
 
-        StringBuilder returnBuffer = new StringBuilder(characterCount);
+        StringBuilder returnBuffer = new StringBuilder(64);
 
-        for(int i = 0 ; i < characterCount ; i++ ) {
+        for (int i = 0; i < 64; i++) {
             returnBuffer.append(letters.charAt(random.nextInt(letters.length())));
         }
 

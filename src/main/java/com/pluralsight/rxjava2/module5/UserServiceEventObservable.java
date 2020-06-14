@@ -4,7 +4,9 @@ import com.pluralsight.rxjava2.utility.MutableReference;
 import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.events.AccountCredentialsUpdatedEvent;
 import com.pluralsight.rxjava2.utility.events.EventBase;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Supplier;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,17 +22,16 @@ public class UserServiceEventObservable {
     public static Observable<EventBase> userServiceEventGenerator() {
 
         return Observable.generate(
-                () -> new MutableReference<Integer>(0),
+                (@NonNull Supplier<MutableReference<Integer>>) MutableReference::new,
                 (offset, eventBaseEmitter) -> {
 
                     // Restrict the offset to the size of our email list.
-                    if( offset.getValue() >= emailList.length ) {
+                    if (offset.getValue() >= emailList.length) {
 
                         // If we are at the end of the list, then send
                         // the onComplete.
                         eventBaseEmitter.onComplete();
-                    }
-                    else {
+                    } else {
                         // We are still in the list...send an update event with
                         // the correct email address.
                         eventBaseEmitter.onNext(new AccountCredentialsUpdatedEvent(emailList[offset.getValue()]));

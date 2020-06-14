@@ -2,6 +2,7 @@ package com.pluralsight.rxjava2.module4;
 
 import com.pluralsight.rxjava2.utility.MutableReference;
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence;
+import io.reactivex.rxjava3.functions.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,11 +18,11 @@ public class CollectExample2 {
                 .collect(
                         // What is the initial state?  In this case we makeObservable a container
                         // for an integer.
-                        () -> new MutableReference<Long>(0L),
+                        (Supplier<MutableReference<Long>>) MutableReference::new,
 
                         // The collection function.  Sum the next number into the MutableReference
-                        (mutableReference , nextValue) ->
-                                mutableReference.setValue( mutableReference.getValue() + nextValue)
+                        (mutableReference, nextValue) ->
+                                mutableReference.setValue(mutableReference.getValue() + nextValue)
 
                 )
 

@@ -1,7 +1,7 @@
 ﻿package com.pluralsight.rxjava2.module2
 
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
-import com.pluralsight.rxjava2.utility.subscribers.*
+import com.pluralsight.rxjava2.utility.subscribers.SingleDemoSubscriber
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 
@@ -10,7 +10,7 @@ fun main() {
     runCode("Single") {
         Observable.fromArray(*GreekAlphabet.greekLetters)
                 .first("?")
-                .subscribe({ SingleDemoSubscriber<String>(gate) },
+                .subscribe({ SingleDemoSubscriber<String>() },
                         { gate.onError(it) }
                 )
     }
