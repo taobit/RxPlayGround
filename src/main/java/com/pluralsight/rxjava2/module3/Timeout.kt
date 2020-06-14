@@ -22,6 +22,7 @@ fun main() {
                 .subscribe(DemoSubscriber<String>())
         gate.waitForAny("onComplete", "onError")
     }
+    gate.resetAll()
     runCode("") {
         Observable.create<String> {
             sleep(1, TimeUnit.DAYS)
