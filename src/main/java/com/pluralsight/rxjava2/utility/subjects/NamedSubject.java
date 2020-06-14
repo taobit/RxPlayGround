@@ -1,6 +1,6 @@
 package com.pluralsight.rxjava2.utility.subjects;
 
-import io.reactivex.subjects.Subject;
+import io.reactivex.rxjava3.subjects.Subject;
 
 public class NamedSubject<TEventType> extends SelectableSubject<TEventType> {
 

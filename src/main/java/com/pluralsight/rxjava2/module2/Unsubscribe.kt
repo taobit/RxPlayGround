@@ -1,9 +1,9 @@
 ﻿package com.pluralsight.rxjava2.module2
 
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.system.exitProcess
 

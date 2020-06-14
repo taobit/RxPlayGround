@@ -2,8 +2,8 @@
 
 import com.pluralsight.rxjava2.module2.log
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.SingleObserver
+import io.reactivex.rxjava3.disposables.Disposable
 
 class SingleDemoSubscriber<TEvent> @JvmOverloads constructor(
         private val gate: GateBasedSynchronization = GateBasedSynchronization()

@@ -1,6 +1,6 @@
 package com.pluralsight.rxjava2.module2.slideExamples;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class HighLevelLifecycle {
 

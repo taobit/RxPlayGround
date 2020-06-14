@@ -2,8 +2,8 @@ package com.pluralsight.rxjava2.module3
 
 import com.pluralsight.rxjava2.module2.gate
 import com.pluralsight.rxjava2.module2.log
-import com.pluralsight.rxjava2.utility.ThreadHelper
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet.greekAlphabetInEnglishHotObservable
+import com.pluralsight.rxjava2.utility.sleep
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
@@ -16,7 +16,7 @@ fun main() {
             .take(5)
 
     // Sleep for 2 seconds to give the hot observable a chance to run.
-    ThreadHelper.sleep(2, TimeUnit.SECONDS)
+    sleep(2, TimeUnit.SECONDS)
 
     // Setup a subscriber
     val subscriber = DemoSubscriber<String>(gate)

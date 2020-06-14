@@ -2,8 +2,8 @@ package com.pluralsight.rxjava2.utility.subscribers
 
 import com.pluralsight.rxjava2.module2.log
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization
-import com.pluralsight.rxjava2.utility.ThreadHelper
-import io.reactivex.observers.ResourceObserver
+import com.pluralsight.rxjava2.utility.sleep
+import io.reactivex.rxjava3.observers.ResourceObserver
 import java.util.concurrent.TimeUnit
 
 class DemoSubscriber<TEvent> @JvmOverloads constructor(
@@ -17,7 +17,7 @@ class DemoSubscriber<TEvent> @JvmOverloads constructor(
 
         // Drag our feet if requested to do so...
         if (onNextDelayDuration > 0) {
-            ThreadHelper.sleep(onNextDelayDuration, onNextDelayTimeUnit)
+            sleep(onNextDelayDuration, onNextDelayTimeUnit)
         }
     }
 

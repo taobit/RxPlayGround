@@ -7,8 +7,8 @@ import com.pluralsight.rxjava2.nitrite.datasets.NitriteGreekAlphabetSchema;
 import com.pluralsight.rxjava2.nitrite.entity.LetterPair;
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

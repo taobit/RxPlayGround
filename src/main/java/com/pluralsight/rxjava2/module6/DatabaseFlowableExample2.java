@@ -5,10 +5,10 @@ import com.pluralsight.rxjava2.nitrite.NitriteTestDatabase;
 import com.pluralsight.rxjava2.nitrite.dataaccess.FibonacciNumberDataAccess;
 import com.pluralsight.rxjava2.nitrite.datasets.NitriteFibonacciSequenceSchema;
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableSubscriber;
-import io.reactivex.schedulers.Schedulers;
+import com.pluralsight.rxjava2.utility.ThreadKt;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.FlowableSubscriber;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +78,7 @@ public class DatabaseFlowableExample2 {
 
                         // Sleep for 10 milliseconds to slow things down like
                         // our previous example.
-                        ThreadHelper.sleep(10, TimeUnit.MILLISECONDS);
+                        ThreadKt.sleep(10, TimeUnit.MILLISECONDS);
 
                         // Increment our counter.  Every 3rd event,
                         // ask for 3 more.

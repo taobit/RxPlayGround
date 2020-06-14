@@ -1,12 +1,12 @@
 package com.pluralsight.rxjava2.module5;
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
-import io.reactivex.subjects.Subject;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.PublishSubject;
+import io.reactivex.rxjava3.subjects.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class PublishSubjectExample3 {
                             publishSubscribeSubject.onNext(nextLetter);
 
                             // Slow things down be 250 milliseconds
-                            ThreadHelper.sleep(250, TimeUnit.MILLISECONDS);
+                            ThreadKt.sleep(250, TimeUnit.MILLISECONDS);
                         },
 
                         // onError handler...

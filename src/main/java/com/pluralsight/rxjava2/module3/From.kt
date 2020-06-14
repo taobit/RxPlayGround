@@ -3,7 +3,7 @@
 import com.pluralsight.rxjava2.module2.runCode
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.Executors
 import java.util.concurrent.FutureTask
 import kotlin.system.exitProcess

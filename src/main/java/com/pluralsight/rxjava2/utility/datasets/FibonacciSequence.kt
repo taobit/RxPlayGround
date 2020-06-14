@@ -1,6 +1,6 @@
 ﻿package com.pluralsight.rxjava2.utility.datasets
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 object FibonacciSequence {
     @JvmStatic

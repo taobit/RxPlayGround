@@ -4,9 +4,9 @@ import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet;
 import com.pluralsight.rxjava2.utility.datasets.GreekLetterPair;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,18 +24,12 @@ public class FlatMapExample1 {
 
         // Create the first thread pool
         AtomicInteger threadPool1Counter = new AtomicInteger();
-        Executor threadPool1 = Executors.newFixedThreadPool(20, runnable -> {
-            Thread returnThread = new Thread(runnable, "Pool 1 Thread " + threadPool1Counter.getAndIncrement());
-            return returnThread;
-        });
+        Executor threadPool1 = Executors.newFixedThreadPool(20, runnable -> new Thread(runnable, "Pool 1 Thread " + threadPool1Counter.getAndIncrement()));
         Scheduler scheduler1 = Schedulers.from(threadPool1);
 
         // Create a second thread pool
         AtomicInteger threadPool2Counter = new AtomicInteger();
-        Executor threadPool2 = Executors.newFixedThreadPool(20, runnable -> {
-            Thread returnThread = new Thread(runnable, "Pool 2 Thread " + threadPool2Counter.getAndIncrement());
-            return returnThread;
-        });
+        Executor threadPool2 = Executors.newFixedThreadPool(20, runnable -> new Thread(runnable, "Pool 2 Thread " + threadPool2Counter.getAndIncrement()));
         Scheduler scheduler2 = Schedulers.from(threadPool2);
 
 

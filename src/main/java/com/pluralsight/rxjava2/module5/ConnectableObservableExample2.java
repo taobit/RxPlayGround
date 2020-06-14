@@ -1,9 +1,9 @@
 package com.pluralsight.rxjava2.module5;
 
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,14 +41,14 @@ public class ConnectableObservableExample2 {
         intervalSequence.subscribe(demoSubscriber2);
 
         // Allow things to happen for 2 seconds.
-        ThreadHelper.sleep(2, TimeUnit.SECONDS);
+        ThreadKt.sleep(2, TimeUnit.SECONDS);
 
         // Dispose of the first subscriber.  Notice that the
         // events continue to flow.
         demoSubscriber1.dispose();
 
         // Wait another 2 seconds
-        ThreadHelper.sleep(2 , TimeUnit.SECONDS);
+        ThreadKt.sleep(2 , TimeUnit.SECONDS);
 
         // Dispose of the second subscriber.  Notice that the
         // events stop flowing
@@ -57,10 +57,10 @@ public class ConnectableObservableExample2 {
         // Wait for another 2 seconds and emit a message
         // so we see that no events are flowing.
         log.info( "Pausing for 2 seconds...");
-        ThreadHelper.sleep(2, TimeUnit.SECONDS);
+        ThreadKt.sleep(2, TimeUnit.SECONDS);
         log.info( "...pause complete");
 
-        ThreadHelper.sleep(2, TimeUnit.SECONDS);
+        ThreadKt.sleep(2, TimeUnit.SECONDS);
 
         System.exit(0);
     }

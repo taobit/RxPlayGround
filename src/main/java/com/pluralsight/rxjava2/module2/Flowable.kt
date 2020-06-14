@@ -1,9 +1,10 @@
 ﻿package com.pluralsight.rxjava2.module2
 
-import com.pluralsight.rxjava2.utility.ThreadHelper
-import io.reactivex.Flowable
-import io.reactivex.FlowableSubscriber
-import io.reactivex.schedulers.Schedulers
+import com.pluralsight.rxjava2.utility.sleep
+import com.pluralsight.rxjava2.utility.subscribers.onError
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.FlowableSubscriber
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.reactivestreams.Subscription
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
@@ -33,15 +34,14 @@ fun main() {
 
         override fun onNext(t: Int?) {
             log.info("onNext : $t")
-            ThreadHelper.sleep(10L, TimeUnit.MILLISECONDS)
+            sleep(10L, TimeUnit.MILLISECONDS)
             if (counter.incrementAndGet() % 3 == 0) {
                 subscription?.request(3)
             }
         }
 
-        override fun onError(t: Throwable?) {
-            log.error(t?.message)
-            gate.openGate("onError")
+        override fun onError(t: Throwable) {
+            t.let { gate.onError(it) }
         }
     }.also {
         range.subscribe(it)

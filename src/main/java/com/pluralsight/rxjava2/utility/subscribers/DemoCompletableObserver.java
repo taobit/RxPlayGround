@@ -1,8 +1,8 @@
 package com.pluralsight.rxjava2.utility.subscribers;
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import io.reactivex.CompletableObserver;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

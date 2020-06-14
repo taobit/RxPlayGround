@@ -1,12 +1,12 @@
 package com.pluralsight.rxjava2.module5;
 
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence;
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet;
 import com.pluralsight.rxjava2.utility.subjects.SelectableSubject;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,16 +19,12 @@ public class PublishSubjectExample1 {
     public static void main(String[] args) {
 
         // Create a SelectableSubject<String> using a PublishSubject
-        SelectableSubject subject = new SelectableSubject(PublishSubject.create());
+        SelectableSubject<String> subject = new SelectableSubject<>();
 
         // At least one consumer needs to be present, else the producers
         // will detect that no one is listening and dispose themselves.
-        subject.addEventConsumer(
-                new DemoSubscriber()
-        );
-        subject.addEventConsumer(
-                new DemoSubscriber()
-        );
+
+        subject.addEventConsumer(new DemoSubscriber<>());
 
         // Create an Observable that emits the English form of the Greek alphabet.
         subject.addEventProducer(
@@ -46,7 +42,7 @@ public class PublishSubjectExample1 {
                         .subscribeOn(Schedulers.computation())
         );
 
-        ThreadHelper.sleep(10, TimeUnit.SECONDS);
+        ThreadKt.sleep(10, TimeUnit.SECONDS);
 
         System.exit(0);
     }

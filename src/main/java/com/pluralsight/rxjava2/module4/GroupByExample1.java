@@ -1,10 +1,10 @@
 package com.pluralsight.rxjava2.module4;
 
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observables.GroupedObservable;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observables.GroupedObservable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +42,7 @@ public class GroupByExample1 {
 
                         // StringBuilder used to concatenate the values coming
                         // from the stream.
-                        private StringBuilder valueList = new StringBuilder();
+                        private final StringBuilder valueList = new StringBuilder();
 
                         @Override
                         public void onSubscribe(Disposable d) {

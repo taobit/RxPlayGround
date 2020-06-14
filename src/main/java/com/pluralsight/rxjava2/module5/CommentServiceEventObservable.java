@@ -1,10 +1,10 @@
 package com.pluralsight.rxjava2.module5;
 
 import com.pluralsight.rxjava2.utility.MutableReference;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.events.EventBase;
 import com.pluralsight.rxjava2.utility.events.NewCommentPostedEvent;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +48,7 @@ public class CommentServiceEventObservable {
                     offset.setValue( offset.getValue() + 1 );
 
                     // Slow things down
-                    ThreadHelper.sleep(1500, TimeUnit.MILLISECONDS);
+                    ThreadKt.sleep(1500, TimeUnit.MILLISECONDS);
                 });
         }
 

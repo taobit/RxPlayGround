@@ -16,7 +16,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.26")
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.0")
     // RxJava
-    implementation("io.reactivex.rxjava2:rxjava:2.2.8")
+//    implementation("io.reactivex.rxjava2:rxjava:2.2.8")
 
     // Nitrite Embedded Document Database
     implementation("org.dizitart:nitrite:3.2.0")

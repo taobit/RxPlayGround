@@ -1,8 +1,9 @@
 package com.pluralsight.rxjava2.module3
 
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber
-import io.reactivex.Observable
-import io.reactivex.functions.BiConsumer
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.functions.BiConsumer
 import java.util.concurrent.Callable
 
 
@@ -12,25 +13,27 @@ fun main() {
 }
 
 fun makeObservable(start: Int, multiplier: Int, totalNumbers: Int): Observable<Int> {
-    return Observable.generate(Callable { GeometricSequenceState(start, multiplier, totalNumbers) },
-            BiConsumer { state, emitter ->
+    return Observable.generate {
+        Callable { GeometricSequenceState(start, multiplier, totalNumbers) }
+        BiConsumer { state: GeometricSequenceState, emitter: Observer<Int> ->
 
-                // If we have reached the end, then emit and onComplete.
-                if (state.count >= state.totalNumbers) {
-                    emitter.onComplete()
-                    return@BiConsumer
-                }
+            // If we have reached the end, then emit and onComplete.
+            if (state.count >= state.totalNumbers) {
+                emitter.onComplete()
+                return@BiConsumer
+            }
 
-                // Increment the number of values we have emitted
-                state.incrementCount()
+            // Increment the number of values we have emitted
+            state.incrementCount()
 
-                // Emit the currently calculated
-                // value of the geometric sequence.
-                emitter.onNext(state.currentValue)
+            // Emit the currently calculated
+            // value of the geometric sequence.
+            emitter.onNext(state.currentValue)
 
-                // Calculate the next value in the sequence.
-                state.generateNextValue()
-            })
+            // Calculate the next value in the sequence.
+            state.generateNextValue()
+        }
+    }
 }
 
 private data class GeometricSequenceState(var currentValue: Int, private val multiplier: Int, val totalNumbers: Int) {

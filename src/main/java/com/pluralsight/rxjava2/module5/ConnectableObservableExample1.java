@@ -1,11 +1,11 @@
 package com.pluralsight.rxjava2.module5;
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.observables.ConnectableObservable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.observables.ConnectableObservable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class ConnectableObservableExample1 {
         fibonacciSequence.subscribe(subscriber1);
         fibonacciSequence.subscribe(subscriber2);
 
-        ThreadHelper.sleep(2, TimeUnit.SECONDS);
+        ThreadKt.sleep(2, TimeUnit.SECONDS);
 
         // Call connect to start the flow of events in the Fibonacci sequence.
         fibonacciSequence.connect();

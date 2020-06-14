@@ -2,7 +2,7 @@
 
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
 import com.pluralsight.rxjava2.utility.subscribers.*
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 fun main() {
 

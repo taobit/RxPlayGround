@@ -1,19 +1,15 @@
 package com.pluralsight.rxjava2.module3;
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import java.util.concurrent.TimeUnit;
 
 public class TimeoutExample {
-
-   private final static Logger log = LoggerFactory.getLogger(TimeoutExample.class);
 
     public static void main(String[] args) {
 
@@ -24,7 +20,7 @@ public class TimeoutExample {
         Observable<Object> greekAlphabetWithBigDelay = Observable.create(emitter -> {
             emitter.onNext(GreekAlphabet.getGreekLettersInEnglish()[0]);  // Emit alpha
             emitter.onNext(GreekAlphabet.getGreekLettersInEnglish()[1]);  // Emit beta
-            ThreadHelper.sleep(1,TimeUnit.DAYS);            // wait 1 days
+            ThreadKt.sleep(1,TimeUnit.DAYS);            // wait 1 days
             emitter.onNext(GreekAlphabet.getGreekLettersInEnglish()[2]);  // Emit gamma
             emitter.onComplete();
         })

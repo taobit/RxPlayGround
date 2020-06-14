@@ -6,8 +6,8 @@ import com.pluralsight.rxjava2.nitrite.dataaccess.FibonacciNumberDataAccess;
 import com.pluralsight.rxjava2.nitrite.datasets.NitriteFibonacciSequenceSchema;
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

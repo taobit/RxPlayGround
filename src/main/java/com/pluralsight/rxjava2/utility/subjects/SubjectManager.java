@@ -1,7 +1,7 @@
  package com.pluralsight.rxjava2.utility.subjects;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
 
 import java.util.HashMap;
 

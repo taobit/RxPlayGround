@@ -1,11 +1,11 @@
 package com.pluralsight.rxjava2.module5;
 
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.subjects.NamedSubject;
 import com.pluralsight.rxjava2.utility.subjects.SubjectManager;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class PublishSubjectExample2 {
 
         // At least one consumer needs to be present, else the Subject
         // will detect that no one is listening and dispose the producers.
-        subjectManager.addEventConsumer(USER_SERVICE_SUBJECT_NAME, new DemoSubscriber());
+        subjectManager.addEventConsumer(USER_SERVICE_SUBJECT_NAME, new DemoSubscriber<>());
         subjectManager.addEventConsumer(COMMENT_SERVICE_SUBJECT_NAME, new DemoSubscriber());
 
         // Attach our message producers
@@ -44,7 +44,7 @@ public class PublishSubjectExample2 {
                 .subscribeOn(Schedulers.computation())
         );
 
-        ThreadHelper.sleep(10, TimeUnit.SECONDS);
+        ThreadKt.sleep(10, TimeUnit.SECONDS);
 
         System.exit(0);
     }

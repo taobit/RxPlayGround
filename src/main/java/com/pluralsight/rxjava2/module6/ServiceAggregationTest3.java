@@ -10,9 +10,9 @@ import com.pluralsight.rxjava2.nitrite.datasets.NitriteCustomerDatabaseSchema;
 import com.pluralsight.rxjava2.nitrite.entity.Customer;
 import com.pluralsight.rxjava2.nitrite.entity.CustomerAddress;
 import com.pluralsight.rxjava2.nitrite.entity.Product;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
 package com.pluralsight.rxjava2.utility.network;
 
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
@@ -41,7 +41,7 @@ public class AdditionHandler implements HttpHandler {
         }
 
         // Sleep for as long as the delay specifies.
-        ThreadHelper.sleep(delay, TimeUnit.MILLISECONDS);
+        ThreadKt.sleep(delay, TimeUnit.MILLISECONDS);
 
         // Create a string response after adding a plus b.
         String response = Integer.toString(a+b);

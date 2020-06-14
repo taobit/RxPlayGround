@@ -1,10 +1,11 @@
 package com.pluralsight.rxjava2.module5;
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.AsyncSubject;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.AsyncSubject;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,7 @@ public class AsyncSubjectExample1 {
         Runnable longRunningAction = () -> {
 
             // Sleep for 2 seconds...
-            ThreadHelper.sleep(2, TimeUnit.SECONDS);
+            ThreadKt.sleep(2, TimeUnit.SECONDS);
 
             // Emit some data
             asyncFetchSubject.onNext("Hello World 1");
@@ -35,7 +36,7 @@ public class AsyncSubjectExample1 {
             asyncFetchSubject.onNext("Hello World 3");
 
             // Sleep some more
-            ThreadHelper.sleep(1, TimeUnit.SECONDS);
+            ThreadKt.sleep(1, TimeUnit.SECONDS);
 
             // Complete the stream
             asyncFetchSubject.onComplete();

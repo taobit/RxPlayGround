@@ -5,7 +5,7 @@ import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
 import com.pluralsight.rxjava2.utility.subscribers.onComplete
 import com.pluralsight.rxjava2.utility.subscribers.onError
 import com.pluralsight.rxjava2.utility.subscribers.onSubscribe
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import kotlin.system.exitProcess
 
 

@@ -3,8 +3,8 @@ package com.pluralsight.rxjava2.nitrite.aggregate;
 import com.pluralsight.rxjava2.nitrite.entity.Customer;
 import com.pluralsight.rxjava2.nitrite.entity.CustomerAddress;
 import com.pluralsight.rxjava2.nitrite.entity.Product;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 public class CustomerAggregateOperations {
 

@@ -5,10 +5,10 @@ import com.pluralsight.rxjava2.nitrite.NitriteTestDatabase;
 import com.pluralsight.rxjava2.nitrite.dataaccess.FibonacciNumberDataAccess;
 import com.pluralsight.rxjava2.nitrite.datasets.NitriteFibonacciSequenceSchema;
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
-import io.reactivex.FlowableSubscriber;
-import io.reactivex.parallel.ParallelFlowable;
-import io.reactivex.schedulers.Schedulers;
+import com.pluralsight.rxjava2.utility.ThreadKt;
+import io.reactivex.rxjava3.core.FlowableSubscriber;
+import io.reactivex.rxjava3.parallel.ParallelFlowable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +101,7 @@ public class DatabaseFlowableExample3 {
                         public void onNext(Long nextNumber) {
 
                             // Slow things down on purpose.
-                            ThreadHelper.sleep(50, TimeUnit.MILLISECONDS);
+                            ThreadKt.sleep(50, TimeUnit.MILLISECONDS);
 
                             // Log the next number
                             log.info("Next Fibonacci Number: {} - {}", nextNumber, id);

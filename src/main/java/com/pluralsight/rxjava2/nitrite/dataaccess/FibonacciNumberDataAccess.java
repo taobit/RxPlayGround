@@ -1,8 +1,8 @@
 package com.pluralsight.rxjava2.nitrite.dataaccess;
 
 import com.pluralsight.rxjava2.nitrite.entity.FibonacciNumber;
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 import org.dizitart.no2.Nitrite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

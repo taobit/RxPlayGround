@@ -1,17 +1,16 @@
 package com.pluralsight.rxjava2.module3;
 
-import com.pluralsight.rxjava2.utility.ThreadHelper;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class SampleExample1 {
+import static com.pluralsight.rxjava2.utility.ThreadKt.sleep;
 
-    private final static Logger log = LoggerFactory.getLogger(SampleExample1.class);
+public class SampleExample1 {
 
     public static void main(String[] args) {
 
@@ -31,7 +30,7 @@ public class SampleExample1 {
         incrementingObservable.subscribe(new DemoSubscriber<>());
 
         // Wait for 10 seconds
-        ThreadHelper.sleep(10, TimeUnit.SECONDS);
+        sleep(10, TimeUnit.SECONDS);
 
         System.exit(0);
     }

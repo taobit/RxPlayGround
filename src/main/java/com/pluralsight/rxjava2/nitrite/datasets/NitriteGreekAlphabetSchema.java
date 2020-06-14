@@ -3,7 +3,7 @@ package com.pluralsight.rxjava2.nitrite.datasets;
 import com.pluralsight.rxjava2.nitrite.NitriteSchema;
 import com.pluralsight.rxjava2.nitrite.entity.LetterPair;
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 

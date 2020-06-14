@@ -2,10 +2,10 @@ package com.pluralsight.rxjava2.module3
 
 import com.pluralsight.rxjava2.module2.gate
 import com.pluralsight.rxjava2.module2.log
-import com.pluralsight.rxjava2.utility.ThreadHelper
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet.greekAlphabetInEnglishObservable
+import com.pluralsight.rxjava2.utility.sleep
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
@@ -21,7 +21,7 @@ fun main() {
 
     // Sleep for 2 seconds to give the observable time to run if it's going to...
     // but it's not since it's a cold observable.
-    ThreadHelper.sleep(2, TimeUnit.SECONDS)
+    sleep(2, TimeUnit.SECONDS)
 
     // Setup a subscriber
     log.info("Subscribing...")

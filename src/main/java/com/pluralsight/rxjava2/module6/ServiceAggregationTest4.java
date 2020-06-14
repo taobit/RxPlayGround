@@ -7,11 +7,11 @@ import com.pluralsight.rxjava2.nitrite.dataaccess.CustomerAddressDataAccess;
 import com.pluralsight.rxjava2.nitrite.dataaccess.CustomerDataAccess;
 import com.pluralsight.rxjava2.nitrite.dataaccess.CustomerProductPurchaseHistoryDataAccess;
 import com.pluralsight.rxjava2.nitrite.datasets.NitriteCustomerDatabaseSchema;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.functions.Function;
-import io.reactivex.internal.functions.Functions;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.internal.functions.Functions;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

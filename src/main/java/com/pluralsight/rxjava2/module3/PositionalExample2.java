@@ -2,7 +2,7 @@ package com.pluralsight.rxjava2.module3;
 
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence;
 import com.pluralsight.rxjava2.utility.subscribers.SingleDemoSubscriber;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

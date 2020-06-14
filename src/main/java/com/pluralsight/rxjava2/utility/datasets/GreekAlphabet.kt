@@ -1,9 +1,9 @@
 package com.pluralsight.rxjava2.utility.datasets
 
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.PublishSubject
 import org.slf4j.LoggerFactory
 import java.util.stream.IntStream
 

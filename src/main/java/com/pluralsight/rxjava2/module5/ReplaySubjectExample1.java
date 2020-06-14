@@ -1,12 +1,12 @@
 package com.pluralsight.rxjava2.module5;
 
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.datasets.FibonacciSequence;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.ReplaySubject;
-import io.reactivex.subjects.Subject;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.ReplaySubject;
+import io.reactivex.rxjava3.subjects.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public class ReplaySubjectExample1 {
         );
 
         // Pause to allow the sequence to run for a moment
-        ThreadHelper.sleep(1, TimeUnit.SECONDS);
+        ThreadKt.sleep(1, TimeUnit.SECONDS);
 
         // Attach to the ReplaySubject.  We should get at least
         // 20 numbers.
@@ -45,7 +45,7 @@ public class ReplaySubjectExample1 {
                 .subscribe(new DemoSubscriber<>());
 
         // Give it a second...
-        ThreadHelper.sleep(1, TimeUnit.SECONDS);
+        ThreadKt.sleep(1, TimeUnit.SECONDS);
 
         log.info("----------------------------------------------------");
 
@@ -55,7 +55,7 @@ public class ReplaySubjectExample1 {
                 .subscribeOn(Schedulers.computation())
                 .subscribe(new DemoSubscriber<>());
 
-        ThreadHelper.sleep(2, TimeUnit.SECONDS);
+        ThreadKt.sleep(2, TimeUnit.SECONDS);
 
         System.exit(0);
     }

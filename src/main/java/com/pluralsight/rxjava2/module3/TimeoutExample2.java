@@ -1,11 +1,11 @@
 package com.pluralsight.rxjava2.module3;
 
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.ThreadHelper;
+import com.pluralsight.rxjava2.utility.ThreadKt;
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet;
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TimeoutExample2 {
         // Create a custom Observable that will emit alpha, beta, pause for a day, and
         // then emit gamma.
         Observable<Object> greekAlphabetWithBigDelay = Observable.create(emitter -> {
-            ThreadHelper.sleep(1,TimeUnit.DAYS);            // wait 1 days
+            ThreadKt.sleep(1,TimeUnit.DAYS);            // wait 1 days
             Arrays.stream(GreekAlphabet.getGreekLettersInEnglish())
                     .forEach(emitter::onNext);
             emitter.onComplete();

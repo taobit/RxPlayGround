@@ -1,8 +1,8 @@
 ﻿package com.pluralsight.rxjava2.module2
 
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
