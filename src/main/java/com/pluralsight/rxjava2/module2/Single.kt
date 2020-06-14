@@ -2,8 +2,7 @@ package com.pluralsight.rxjava2.module2
 
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.SingleObserver
-import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import kotlin.system.exitProcess
 
 /*
@@ -12,23 +11,16 @@ import kotlin.system.exitProcess
  */
 fun main() {
     // only take the first letter
-    Observable.fromArray(*GreekAlphabet.greekLetters).first("A").also {
-        it.subscribe(object : SingleObserver<String> {
-            override fun onSuccess(t: String) {
-                log.info("onSuccess $t")
-            }
-
-            override fun onSubscribe(d: Disposable) {
+    Observable.fromArray(*GreekAlphabet.greekLetters)
+        .first("A")
+        .also { single ->
+            single.doOnSubscribe {
                 log.info("onSubscribe")
-            }
-
-            override fun onError(e: Throwable) {
-                log.error("onError", e)
-                gate.openGate("onError")
-            }
-
-        })
-    }
+            }.subscribeBy(
+                onSuccess = { gate.onSuccess(it) },
+                onError = { gate.onError(it) }
+            )
+        }
     gate.waitForAny("onSuccess", "onError")
     exitProcess(0)
 }

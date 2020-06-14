@@ -3,6 +3,7 @@
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
 import com.pluralsight.rxjava2.utility.subscribers.*
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 
 fun main() {
 
@@ -30,15 +31,15 @@ fun main() {
     }
     runCode("MaybeNo") {
         Observable.fromArray(*GreekAlphabet.greekLetters)
-                .first("?")
-                .filter { it != "\u03b1" }
-                .doOnSubscribe {
-                    gate.onSubscribe()
-                }.subscribe(
-                        { gate.onSuccess(it) },
-                        { gate.onError(it) },
-                        { gate.onComplete() }
-                )
+            .first("?")
+            .filter { it != "\u03b1" }
+            .doOnSubscribe {
+                gate.onSubscribe()
+            }.subscribeBy(
+                onComplete = { gate.onComplete() },
+                onSuccess = { gate.onSuccess(it) },
+                onError = { gate.onError(it) }
+            )
     }
 
     runCode("Complete") {

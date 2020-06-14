@@ -13,7 +13,7 @@ fun main() {
             .subscribeOn(Schedulers.newThread())
             .observeOn(Schedulers.newThread())
 
-    DemoSubscriber<Int>(gate, onNextDelayDuration = 10L, onNextDelayTimeUnit = TimeUnit.MILLISECONDS).also {
+    DemoSubscriber<Int>(onNextDelayDuration = 10L, onNextDelayTimeUnit = TimeUnit.MILLISECONDS).also {
         range.subscribe(it)
     }
 

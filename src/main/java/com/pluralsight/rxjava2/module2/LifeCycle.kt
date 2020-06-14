@@ -3,31 +3,22 @@
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
 import com.pluralsight.rxjava2.utility.datasets.GreekLetterPair
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.BiFunction
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import kotlin.system.exitProcess
 
 fun main() {
     fun Observable<GreekLetterPair>.subscribeToZipObservable() {
-        subscribe(object : Observer<GreekLetterPair> {
-            override fun onComplete() {
-                log.info("onComplete")
-                gate.openGate("onComplete")
-            }
-
-            override fun onSubscribe(d: Disposable) {
-                log.info("onSubscribe")
-            }
-
-            override fun onNext(t: GreekLetterPair) {
-                log.info("onNext : ${t.englishLetter}, ${t.greekLetter}")
-            }
-
-            override fun onError(e: Throwable) {
-                log.error(e.message)
-            }
-        })
+        doOnSubscribe {
+            log.info("onSubscribe")
+        }
+        subscribeBy(
+            onComplete = { gate.onComplete() },
+            onNext = {
+                log.info("onNext : ${it.englishLetter}, ${it.greekLetter}")
+            },
+            onError = { gate.onError(it) }
+        )
     }
 
     Observable.zip(

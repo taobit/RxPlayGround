@@ -1,7 +1,6 @@
 ﻿package com.pluralsight.rxjava2.module2
 
 import com.pluralsight.rxjava2.utility.sleep
-import com.pluralsight.rxjava2.utility.subscribers.onError
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.FlowableSubscriber
 import io.reactivex.rxjava3.schedulers.Schedulers

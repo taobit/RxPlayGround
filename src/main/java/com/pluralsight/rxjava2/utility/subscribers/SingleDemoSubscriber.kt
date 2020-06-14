@@ -1,6 +1,8 @@
 ﻿package com.pluralsight.rxjava2.utility.subscribers
 
-import com.pluralsight.rxjava2.module2.log
+import com.pluralsight.rxjava2.module2.onError
+import com.pluralsight.rxjava2.module2.onSubscribe
+import com.pluralsight.rxjava2.module2.onSuccess
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
@@ -21,23 +23,4 @@ class SingleDemoSubscriber<TEvent> @JvmOverloads constructor(
         gate.onError(e)
     }
 
-}
-
-fun GateBasedSynchronization.onError(e: Throwable) {
-    log.error("onError : ${e.message}")
-    openGate("onError")
-}
-
-fun GateBasedSynchronization.onSuccess(any: Any) {
-    log.info("onSuccess : $any")
-    openGate("onSuccess")
-}
-
-fun GateBasedSynchronization.onComplete() {
-    log.info("onComplete")
-    openGate("onComplete")
-}
-
-fun GateBasedSynchronization.onSubscribe(){
-    log.info("onSubscribe")
 }

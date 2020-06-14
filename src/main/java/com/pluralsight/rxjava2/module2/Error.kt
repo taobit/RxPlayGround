@@ -2,8 +2,6 @@
 
 import com.pluralsight.rxjava2.utility.datasets.GreekAlphabet
 import com.pluralsight.rxjava2.utility.datasets.GreekLetterPair
-import com.pluralsight.rxjava2.utility.subscribers.onComplete
-import com.pluralsight.rxjava2.utility.subscribers.onError
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
