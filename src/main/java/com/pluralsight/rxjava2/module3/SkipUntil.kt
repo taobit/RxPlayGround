@@ -11,9 +11,7 @@ import kotlin.system.exitProcess
 fun main() {
     GreekAlphabet.greekAlphabetInEnglishObservable()
             .repeat()
-            .skipUntil(
-                Observable.interval(2, 10, TimeUnit.SECONDS)
-            )
+            .skipUntil(Observable.interval(2, 10, TimeUnit.SECONDS))
             .subscribeOn(Schedulers.newThread())
             .subscribe(DemoSubscriber<String>())
     sleep(3, TimeUnit.SECONDS)

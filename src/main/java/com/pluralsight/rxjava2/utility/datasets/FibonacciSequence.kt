@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Observable
 
 object FibonacciSequence {
     @JvmStatic
-    fun create(totalNumber: Long) =
+    fun create(totalNumber: Long): Observable<Long> =
             Observable.create<Long> {
                 var count = 0L
                 var previousValue1 = 1L
