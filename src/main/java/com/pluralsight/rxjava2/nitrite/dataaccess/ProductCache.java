@@ -16,7 +16,7 @@ public class ProductCache {
         synchronized (cacheLoadLock) {
             if( cacheData.size() == 0 ) {
                 ProductDataAccess.select(db)
-                        .subscribe(nextProduct -> cacheData.put(nextProduct.getProductId(), nextProduct));
+                        .subscribe(nextProduct -> cacheData.put(nextProduct.productId, nextProduct));
             }
         }
     }

@@ -7,14 +7,10 @@ import com.pluralsight.rxjava2.nitrite.entity.CustomerProductPurchaseHistory;
 import com.pluralsight.rxjava2.nitrite.entity.Product;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
 public class NitriteCustomerDatabaseSchema implements NitriteSchema {
-
-    private final static Logger log = LoggerFactory.getLogger(NitriteCustomerDatabaseSchema.class);
 
     public UUID Product1UUID;
     public UUID Product2UUID;
@@ -48,15 +44,15 @@ public class NitriteCustomerDatabaseSchema implements NitriteSchema {
         if( productRepo.find().totalCount() == 0 ) {
 
             // Create 3 products
-            Product product1 = new Product(UUID.randomUUID(), "Galoshes of Mud Walking",      "09498772650");
+            Product product1 = new Product(UUID.randomUUID(), "Galoshes of Mud Walking", "09498772650");
             Product product2 = new Product(UUID.randomUUID(), "Stick of Back Scratching +2", "32982349872");
-            Product product3 = new Product(UUID.randomUUID(), "Soap of Cleansing",      "48243939874");
+            Product product3 = new Product(UUID.randomUUID(), "Soap of Cleansing", "48243939874");
 
-            Product1UUID = product1.getProductId();
-            Product2UUID = product2.getProductId();
-            Product3UUID = product3.getProductId();
+            Product1UUID = product1.productId;
+            Product2UUID = product2.productId;
+            Product3UUID = product3.productId;
 
-            productRepo.insert(product1,product2,product3);
+            productRepo.insert(product1, product2, product3);
         }
     }
 
@@ -94,13 +90,13 @@ public class NitriteCustomerDatabaseSchema implements NitriteSchema {
         if( customerRepo.find().totalCount() == 0 ) {
 
             // Create 2 customers
-            Customer customer1 = new Customer(UUID.randomUUID(), "Donald" , "Vanner");
-            Customer customer2 = new Customer(UUID.randomUUID(), "Lawrence" , "Spacestrider");
+            Customer customer1 = new Customer(UUID.randomUUID(), "Donald", "Vanner");
+            Customer customer2 = new Customer(UUID.randomUUID(), "Lawrence", "Spacestrider");
 
             customerRepo.insert(customer1, customer2);
 
-            Customer1UUID = customer1.getCustomerId();
-            Customer2UUID = customer2.getCustomerId();
+            Customer1UUID = customer1.customerId;
+            Customer2UUID = customer2.customerId;
         }
     }
 
