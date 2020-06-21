@@ -22,7 +22,7 @@ fun main() {
                 .first("?")
                 .filter { it == "\u03b1" }
                 .doOnSubscribe {
-                    gate.onSubscribe()
+                    gate.onComplete()
                 }.subscribe(
                         { gate.onSuccess(it) },
                         { gate.onError(it) },
@@ -34,7 +34,7 @@ fun main() {
             .first("?")
             .filter { it != "\u03b1" }
             .doOnSubscribe {
-                gate.onSubscribe()
+                logOnSubscribe()
             }.subscribeBy(
                 onComplete = { gate.onComplete() },
                 onSuccess = { gate.onSuccess(it) },
@@ -46,7 +46,7 @@ fun main() {
         Observable.fromArray(*GreekAlphabet.greekLetters)
                 .ignoreElements()
                 .doOnSubscribe {
-                    gate.onSubscribe()
+                    logOnSubscribe()
                 }.subscribe(
                         { gate.onComplete() },
                         { gate.onError(it) }

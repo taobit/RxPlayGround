@@ -16,19 +16,14 @@ class DemoSubscriber<TEvent> @JvmOverloads constructor(
 ) : ResourceObserver<TEvent>() {
 
     override fun onNext(event: TEvent) {
-        log.info("onNext - {}", event?.toString() ?: "<NULL>")
-
-        // Drag our feet if requested to do so...
+        log.info("onNext $event")
         if (onNextDelayDuration > 0) {
             sleep(onNextDelayDuration, onNextDelayTimeUnit)
         }
     }
 
-    override fun onError(e: Throwable) {
-        gates.onError(e)
-    }
+    override fun onError(e: Throwable) = gates.onError(e)
 
-    override fun onComplete() {
-        gates.onComplete()
-    }
+
+    override fun onComplete() = gates.onComplete()
 }

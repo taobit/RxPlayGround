@@ -3,14 +3,9 @@ package com.pluralsight.rxjava2.utility
 import java.util.*
 
 class MutableReference<TContainedType>(
-        private var value: Optional<TContainedType> = Optional.empty(),
-        containedValue: TContainedType? = null
+        containedValue: TContainedType? = null,
+        private var value: Optional<TContainedType> = Optional.ofNullable(containedValue)
 ) {
-
-    init {
-        containedValue?.let { value = Optional.of(it) }
-    }
-
     fun hasValue(): Boolean {
         return value.isPresent
     }
@@ -24,6 +19,8 @@ class MutableReference<TContainedType>(
     }
 
     fun setValue(newValue: TContainedType) {
-        value = Optional.ofNullable(newValue)
+        value = Optional.of(newValue)
     }
+
+    override fun toString() = value.toString()
 }

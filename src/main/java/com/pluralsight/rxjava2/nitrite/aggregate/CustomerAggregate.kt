@@ -19,12 +19,11 @@ class CustomerAggregate {
         ownedProducts.add(product)
     }
 
-    override fun toString(): String {
-        return "CustomerAggregate{" +
-                "customer=" + customer +
-                ", addresses=" + addresses +
-                ", ownedProducts=" + ownedProducts +
-                '}'
-    }
+    override fun toString() =
+            "CustomerAggregate{" +
+                    "customer=" + customer +
+                    ", addresses=" + addresses +
+                    ", ownedProducts=" + ownedProducts +
+                    '}'
 
 }

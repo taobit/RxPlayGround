@@ -20,7 +20,7 @@ object FibonacciSequence {
                         continue
                     }
                     if (count == 2L) {
-                        it.onNext(2L)
+                        it.onNext(1L)
                         continue
                     }
                     val newValue = previousValue1 + previousValue2

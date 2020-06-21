@@ -11,12 +11,15 @@ object Utils
 @JvmField
 val log: Logger = LoggerFactory.getLogger(Utils.javaClass)
 
+fun logOnSubscribe() = log.info("onSubscribe")
+fun logOnSuccess() = log.info("onSuccess")
+fun logOnComplete() = log.info(OnComplete)
 fun logNext(message: Any) = log.info("onNext : $message")
 fun logError(throwable: Throwable) = log.error("onError : ${throwable.message}")
 
 // keep thread running until finish all test
 val gate = GateBasedSynchronization()
-fun runCode(name: String, function: () -> Unit) {
+fun runCode(name: String = "", function: () -> Unit) {
     log.info("*********************")
     log.info(name)
     log.info("---------------------")
@@ -25,23 +28,18 @@ fun runCode(name: String, function: () -> Unit) {
 }
 
 fun <T : Any> Observable<T>.simplySubscribe() = subscribeBy(
-    onNext = { logNext(it) },
-    onError = { log.error(it.message) },
-    onComplete = { log.info("onComplete") }
-)
-
-fun <T : Any> Observable<T>.simplySubscribeByGate() = subscribeBy(
-    onNext = {
-        logNext(it)
-    },
-
-    onError = { log.error(it.message) },
-    onComplete = { log.info("onComplete") }
+        onNext = { logNext(it) },
+        onError = { log.error(it.message) },
+        onComplete = {
+            log.info(OnComplete)
+        }
 )
 
 fun GateBasedSynchronization.onError(e: Throwable) {
-    log.error("onError : ${e.message}")
-    openGate("onError")
+    with(OnError) {
+        log.error("$this : ${e.message}")
+        openGate(this)
+    }
 }
 
 fun GateBasedSynchronization.onSuccess(any: Any) {
@@ -50,10 +48,11 @@ fun GateBasedSynchronization.onSuccess(any: Any) {
 }
 
 fun GateBasedSynchronization.onComplete() {
-    log.info("onComplete")
-    openGate("onComplete")
+    with(OnComplete) {
+        log.info(this)
+        openGate(this)
+    }
 }
 
-fun GateBasedSynchronization.onSubscribe(){
-    log.info("onSubscribe")
-}
+const val OnError = "onError"
+const val OnComplete = "onComplete"
