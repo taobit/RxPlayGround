@@ -30,5 +30,4 @@ fun main() {
                     log.info(it.toString())
                 }
     }
-
 }

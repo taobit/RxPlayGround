@@ -6,6 +6,7 @@ class MutableReference<TContainedType>(
         containedValue: TContainedType? = null,
         private var value: Optional<TContainedType> = Optional.ofNullable(containedValue)
 ) {
+    @Suppress("unused")
     fun hasValue(): Boolean {
         return value.isPresent
     }
