@@ -5,7 +5,6 @@ import com.pluralsight.rxjava2.module2.log
 import com.pluralsight.rxjava2.nitrite.NitriteTestDatabase
 import com.pluralsight.rxjava2.nitrite.datasets.NitriteGreekAlphabetSchema
 import com.pluralsight.rxjava2.nitrite.entity.LetterPair
-import com.pluralsight.rxjava2.utility.GateBasedSynchronization
 import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber
 import io.reactivex.rxjava3.core.Emitter
 import io.reactivex.rxjava3.core.Observable
@@ -15,13 +14,12 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import org.dizitart.no2.Nitrite
 import org.dizitart.no2.objects.Cursor
 import java.io.IOException
-import java.util.*
 import kotlin.system.exitProcess
 
 
 fun main() {
     try {
-        NitriteTestDatabase(Optional.of(NitriteGreekAlphabetSchema())).use { database ->
+        NitriteTestDatabase(NitriteGreekAlphabetSchema()).use { database ->
             val letterPairs = createLetterPairObservable(database)
             letterPairs
                     .subscribeOn(Schedulers.io())
@@ -45,9 +43,9 @@ private fun createLetterPairObservable(database: NitriteTestDatabase): Observabl
             // operation each time 'subscribe' is called on the Observable we are returning.
             Supplier {
                 NitriteCursorState(
-                        database.nitriteDatabase,  // Setup the Nitrite "Cursor" class with a simple "find" which gets
+                        database.database,  // Setup the Nitrite "Cursor" class with a simple "find" which gets
                         // all documents from the collection "LetterPair".
-                        database.nitriteDatabase
+                        database.database
                                 .getRepository(LetterPair::class.java)
                                 .find()
                 )

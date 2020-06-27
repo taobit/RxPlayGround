@@ -13,7 +13,6 @@ import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,14 +32,14 @@ public class DatabaseFlowableExample2 {
 
             // Using a NitriteTestDatabase, initialized with our Fibonacci sequence
             // of numbers.
-            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(Optional.of(schema))) {
+            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(schema)) {
 
                 // We makeObservable an Flowable<Long> that will emit our Fibonacci
                 // numbers using the Nitrite database.  A flowable will allow
                 // the subscribers to control the speed at which the Fibonacci
                 // sequence is emitted.
                 Flowable<Long> fibonacciObservable = FibonacciNumberDataAccess
-                        .selectAsFlowable(testDatabase.getNitriteDatabase())
+                        .selectAsFlowable(testDatabase.getDatabase())
 
                         // Observe on the computation thread, don't delay errors, and use
                         // a buffer size of 3 items with the flowable.

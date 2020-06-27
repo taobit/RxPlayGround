@@ -3,10 +3,10 @@ package com.pluralsight.rxjava2.nitrite
 import org.dizitart.no2.Nitrite
 
 object NO2 {
-    @JvmStatic
-    fun <T> execute(database: Nitrite, unitOfWork: NitriteUnitOfWorkWithResult<T>): T {
+
+    fun <T> execute(database: Nitrite, result: ApplyNitriteWorkResult<T>): T {
         return try {
-            unitOfWork.apply(database)
+            result.invoke(database)
         } catch (e: Exception) {
             throw RuntimeException(e)
         } finally {
@@ -24,3 +24,5 @@ object NO2 {
         }
     }
 }
+
+typealias ApplyNitriteWorkResult<T> = (Nitrite?) -> T

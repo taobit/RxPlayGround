@@ -16,8 +16,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
-
 public class ServiceAggregationTest2 {
 
     private final static Logger log = LoggerFactory.getLogger(ServiceAggregationTest2.class);
@@ -26,27 +24,27 @@ public class ServiceAggregationTest2 {
 
         try {
             NitriteCustomerDatabaseSchema schema = new NitriteCustomerDatabaseSchema();
-            try(NitriteTestDatabase testDatabase = new NitriteTestDatabase(Optional.of(schema))) {
+            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(schema)) {
 
                 // Create an Observable for getting the customer.
                 // Because we are going to make these observables execute concurrently,
                 // we set them to subscribeOn the I/O thread scheduler.  All concurrent
                 // observe by performing a new subscription on each observable given.
                 Observable<Customer> customerObservable =
-                        CustomerDataAccess.select(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerDataAccess.select(testDatabase.getDatabase(), schema.Customer1UUID)
                                 .subscribeOn(Schedulers.io());
 
                 // Create an Observable to get the Customer's Address information
                 // Again, make sure we are using the IO thread pool.
                 Observable<CustomerAddress> customerAddressObservable =
-                        CustomerAddressDataAccess.select(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerAddressDataAccess.select(testDatabase.getDatabase(), schema.Customer1UUID)
                                 .subscribeOn(Schedulers.io());
 
 
                 // Create an Observable that will give us the Product list that is owned by the customer.
                 // ...on the IO thread pool
                 Observable<Product> ownedProductList =
-                        CustomerProductPurchaseHistoryDataAccess.selectOwnedProducts(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerProductPurchaseHistoryDataAccess.selectOwnedProducts(testDatabase.getDatabase(), schema.Customer1UUID)
                                 .subscribeOn(Schedulers.io());
 
                 // Nothing has actually happened yet...we just have a bunch of

@@ -15,8 +15,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
-
 public class ServiceAggregationTest4 {
 
     private final static Logger log = LoggerFactory.getLogger(ServiceAggregationTest4.class);
@@ -25,22 +23,22 @@ public class ServiceAggregationTest4 {
 
         try {
             NitriteCustomerDatabaseSchema schema = new NitriteCustomerDatabaseSchema();
-            try(NitriteTestDatabase testDatabase = new NitriteTestDatabase(Optional.of(schema))) {
+            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(schema)) {
 
                 // Create an Observable of Observable<Object>.  Each entry will be one of the
                 // Observables for our database that we want to run concurrently.
                 Observable<Observable<Object>> ioFetchStreams = Observable.fromArray(
 
                         // Fetch the customer information
-                        CustomerDataAccess.select(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerDataAccess.select(testDatabase.getDatabase(), schema.Customer1UUID)
                                 .subscribeOn(Schedulers.io()).cast(Object.class),
 
                         // Fetch any address information associated with the customer.
-                        CustomerAddressDataAccess.select(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerAddressDataAccess.select(testDatabase.getDatabase(), schema.Customer1UUID)
                                 .subscribeOn(Schedulers.io()).cast(Object.class),
 
                         // Obtain the customer's product history.
-                        CustomerProductPurchaseHistoryDataAccess.selectOwnedProducts(testDatabase.getNitriteDatabase(),
+                        CustomerProductPurchaseHistoryDataAccess.selectOwnedProducts(testDatabase.getDatabase(),
                                 schema.Customer1UUID)
                                 .subscribeOn(Schedulers.io()).cast(Object.class)
                 );

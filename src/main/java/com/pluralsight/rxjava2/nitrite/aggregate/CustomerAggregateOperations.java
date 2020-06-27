@@ -14,7 +14,7 @@ public class CustomerAggregateOperations {
                 CustomerAggregate::new,
                 (customerAggregate, nextObject) -> {
                     if( nextObject instanceof Customer) {
-                        customerAggregate.customer = (Customer) nextObject;
+                        customerAggregate.setCustomer((Customer)nextObject);
                     }
                     else if( nextObject instanceof CustomerAddress) {
                         customerAggregate.addCustomerAddress((CustomerAddress)nextObject);
@@ -26,5 +26,3 @@ public class CustomerAggregateOperations {
         );
     }
 }
-
-

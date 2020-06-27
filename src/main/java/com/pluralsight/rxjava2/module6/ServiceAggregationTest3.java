@@ -16,8 +16,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
-
 public class ServiceAggregationTest3 {
 
     private final static Logger log = LoggerFactory.getLogger(ServiceAggregationTest3.class);
@@ -27,24 +25,24 @@ public class ServiceAggregationTest3 {
         try {
 
             NitriteCustomerDatabaseSchema schema = new NitriteCustomerDatabaseSchema();
-            try(NitriteTestDatabase testDatabase = new NitriteTestDatabase(Optional.of(schema))) {
+            try(NitriteTestDatabase testDatabase = new NitriteTestDatabase(schema)) {
 
                 // Create an Observable for getting the customer.
                 // Set the scheduler to use the IO thread pool
                 Observable<Customer> customerObservable =
-                        CustomerDataAccess.select(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerDataAccess.select(testDatabase.getDatabase(), schema.Customer1UUID)
                         .subscribeOn(Schedulers.io());
 
                 // Create an Observable to get the Customer's Address information
                 // Again, make sure we are using the IO thread pool.
                 Observable<CustomerAddress> customerAddressObservable =
-                        CustomerAddressDataAccess.select(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerAddressDataAccess.select(testDatabase.getDatabase(), schema.Customer1UUID)
                         .subscribeOn(Schedulers.io());
 
                 // Create an Observable that will give us the Product list that is owned by the customer.
                 // ...on the IO thread pool
                 Observable<Product> ownedProductListObservable =
-                        CustomerProductPurchaseHistoryDataAccess.selectOwnedProducts(testDatabase.getNitriteDatabase(), schema.Customer1UUID)
+                        CustomerProductPurchaseHistoryDataAccess.selectOwnedProducts(testDatabase.getDatabase(), schema.Customer1UUID)
                         .subscribeOn(Schedulers.io());
 
                 // Merge is another operator that performs concurrent execution by subscribing

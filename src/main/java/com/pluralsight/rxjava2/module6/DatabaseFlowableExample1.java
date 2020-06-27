@@ -11,7 +11,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class DatabaseFlowableExample1 {
@@ -30,12 +29,12 @@ public class DatabaseFlowableExample1 {
 
             // Using a NitriteTestDatabase, initialized with our Fibonacci sequence
             // of numbers.
-            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(Optional.of(schema))) {
+            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(schema)) {
 
                 // We makeObservable an Observable<Long> that will emit our Fibonacci
                 // numbers using the Nitrite database.
                 Observable<Long> fibonacciObservable = FibonacciNumberDataAccess
-                        .selectAsObservable(testDatabase.getNitriteDatabase())
+                        .selectAsObservable(testDatabase.getDatabase())
 
                         // Observe events on the computation scheduler.
                         .observeOn(Schedulers.computation())

@@ -13,7 +13,6 @@ import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
@@ -39,7 +38,7 @@ public class DatabaseFlowableExample3 {
 
             // Using a NitriteTestDatabase, initialized with our Fibonacci sequence
             // of numbers.
-            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(Optional.of(schema))) {
+            try (NitriteTestDatabase testDatabase = new NitriteTestDatabase(schema)) {
 
                 // We are going to makeObservable a ParallelFlowable in order to use our flow
                 // controlled observable, but process the messages in parallel.  We
@@ -50,7 +49,7 @@ public class DatabaseFlowableExample3 {
                         ParallelFlowable.from(
 
                                 // .. using the same flowable Fibonacci sequence.
-                                FibonacciNumberDataAccess.selectAsFlowable(testDatabase.getNitriteDatabase())
+                                FibonacciNumberDataAccess.selectAsFlowable(testDatabase.getDatabase())
 
                                         // We want to observe on the IO scheduler...this also cuts the buffer
                                         // size down to 3 x RAIL_COUNT
