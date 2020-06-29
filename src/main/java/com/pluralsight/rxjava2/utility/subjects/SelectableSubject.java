@@ -1,5 +1,6 @@
 package com.pluralsight.rxjava2.utility.subjects;
 
+
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -10,9 +11,9 @@ import java.util.HashMap;
 
 public class SelectableSubject<TEventType> {
 
-    private final Subject<TEventType> internalSubject;
-    private final HashMap<Observable<TEventType>, Disposable> producerTrackingMap;
-    private final HashMap<Observer<TEventType>, Disposable> consumerTrackingMap;
+    private Subject<TEventType> internalSubject;
+    private HashMap<Observable<TEventType>, Disposable> producerTrackingMap;
+    private HashMap<Observer<TEventType>, Disposable> consumerTrackingMap;
 
     public SelectableSubject() {
         this.producerTrackingMap = new HashMap<>();
@@ -29,18 +30,21 @@ public class SelectableSubject<TEventType> {
     public synchronized void addEventProducer(Observable<TEventType> newEventSource) {
 
         // Have the internalSubject subscribe to the incoming event source.
-        newEventSource.doOnSubscribe((disposable) -> {
-                    // Intercept the onSubscribe and track the associated disposable.
-                    producerTrackingMap.put(newEventSource, disposable);
+        newEventSource
+                .doOnSubscribe(
+                        disposable -> {
+                            // Intercept the onSubscribe and track the associated disposable.
+                            this.producerTrackingMap.put(newEventSource, disposable);
 
-                    // Pass the event along to the Subject
-                    internalSubject.onSubscribe(disposable);
-                }
-        ).subscribe(
-                internalSubject::onNext,
-                internalSubject::onError,
-                internalSubject::onComplete
-        );
+                            // Pass the event along to the Subject
+                            this.internalSubject.onSubscribe(disposable);
+                        }
+                )
+                .subscribe(
+                        internalSubject::onNext,
+                        internalSubject::onError,
+                        internalSubject::onComplete
+                );
     }
 
     public synchronized void removeEventProducer(Observable<TEventType> eventSourceToRemove) {
@@ -55,20 +59,17 @@ public class SelectableSubject<TEventType> {
 
     public synchronized void addEventConsumer(Observer<TEventType> newConsumer) {
 
-        internalSubject.doOnSubscribe(
-                disposable -> {
+        internalSubject.doOnSubscribe(disposable -> {
 
-                    // Intercept the disposable for this subscription
-                    consumerTrackingMap.put(newConsumer, disposable);
+            // Intercept the disposable for this subscription
+            consumerTrackingMap.put(newConsumer, disposable);
 
-                    // Pass the onSubscribe along to the Observer.
-                    newConsumer.onSubscribe(disposable);
-                }
-        ).subscribe(
+            // Pass the onSubscribe along to the Observer.
+            newConsumer.onSubscribe(disposable);
+        }).subscribe(
                 newConsumer::onNext,
                 newConsumer::onError,
                 newConsumer::onComplete
-
         );
     }
 

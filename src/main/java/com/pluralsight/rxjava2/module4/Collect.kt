@@ -23,7 +23,7 @@ fun main() {
                 .collect(
                         { MutableReference(0L) },
                         { reference, nextVal ->
-                            reference.setValue(reference.getValue() + nextVal)
+                            reference.containedValue = reference.containedValue?.plus(nextVal)
                         }
                 )
                 .blockingSubscribeBy {

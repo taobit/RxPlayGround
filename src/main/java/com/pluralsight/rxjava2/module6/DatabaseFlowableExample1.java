@@ -5,13 +5,10 @@ import com.pluralsight.rxjava2.nitrite.NitriteTestDatabase;
 import com.pluralsight.rxjava2.nitrite.dataaccess.FibonacciNumberDataAccess;
 import com.pluralsight.rxjava2.nitrite.datasets.NitriteFibonacciSequenceSchema;
 import com.pluralsight.rxjava2.utility.GateBasedSynchronization;
-import com.pluralsight.rxjava2.utility.subscribers.DemoSubscriber;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.TimeUnit;
 
 public class DatabaseFlowableExample1 {
 
@@ -44,9 +41,9 @@ public class DatabaseFlowableExample1 {
 
                 // Set up our DemoSubscriber with a 10 millisecond delay when
                 // processing each event.
-                fibonacciObservable.subscribe(new DemoSubscriber<>(
-                        gate,
-                        10, TimeUnit.MILLISECONDS));
+//                fibonacciObservable.subscribe(new DemoSubscriber<>(
+//                        gate,
+//                        10, TimeUnit.MILLISECONDS));
 
                 gate.waitForAny("onError", "onComplete");
             }

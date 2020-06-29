@@ -13,15 +13,15 @@
 //    @Synchronized
 //    fun addEventProducer(newEventSource: Observable<EventType>) {
 //        newEventSource
-//            .doOnSubscribe {
-//                producerTrackingMap[newEventSource] = it
-//                subject.onSubscribe(it)
-//            }
-//            .subscribe(
-//                { subject.onNext(it) },
-//                { subject.onError(it) },
-//                { subject.onComplete() }
-//            )
+//                .doOnSubscribe {
+//                    producerTrackingMap[newEventSource] = it
+//                    subject.onSubscribe(it)
+//                }
+//                .subscribe(
+//                        { subject.onNext(it) },
+//                        { subject.onError(it) },
+//                        { subject.onComplete() }
+//                )
 //    }
 //
 //    @Synchronized
@@ -34,15 +34,15 @@
 //    @Synchronized
 //    fun addEventConsumer(newConsumer: Observer<EventType>) {
 //        subject
-//            .doOnSubscribe {
-//                consumerTrackingMap[newConsumer] = it
-//                subject.onSubscribe(it)
-//            }
-//            .subscribe(
-//                { subject.onNext(it) },
-//                { subject.onError(it) },
-//                { subject.onComplete() }
-//            )
+//                .doOnSubscribe {
+//                    consumerTrackingMap[newConsumer] = it
+//                    subject.onSubscribe(it)
+//                }
+//                .subscribe(
+//                        { subject.onNext(it) },
+//                        { subject.onError(it) },
+//                        { subject.onComplete() }
+//                )
 //    }
 //
 //    @Synchronized

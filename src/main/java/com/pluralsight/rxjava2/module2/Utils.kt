@@ -30,16 +30,12 @@ fun runCode(name: String = "", function: () -> Unit) {
 fun <T : Any> Observable<T>.simplySubscribe() = subscribeBy(
         onNext = { logNext(it) },
         onError = { log.error(it.message) },
-        onComplete = {
-            log.info(OnComplete)
-        }
+        onComplete = { log.info(OnComplete) }
 )
 
 fun GateBasedSynchronization.onError(e: Throwable) {
-    with(OnError) {
-        log.error("$this : ${e.message}")
-        openGate(this)
-    }
+    log.error("$this : ${e.message}")
+    openGate(OnError)
 }
 
 fun GateBasedSynchronization.onSuccess(any: Any) {
@@ -48,10 +44,8 @@ fun GateBasedSynchronization.onSuccess(any: Any) {
 }
 
 fun GateBasedSynchronization.onComplete() {
-    with(OnComplete) {
-        log.info(this)
-        openGate(this)
-    }
+    logOnSuccess()
+    openGate(OnComplete)
 }
 
 const val OnError = "onError"
