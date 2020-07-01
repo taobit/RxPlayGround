@@ -1,6 +1,6 @@
 package com.pluralsight.rxjava2.utility.network
 
-import com.pluralsight.rxjava2.module2.log
+import com.pluralsight.rxjava2.module2.logError
 import com.sun.net.httpserver.HttpServer
 import java.net.InetSocketAddress
 import java.util.concurrent.Executor
@@ -11,7 +11,6 @@ object SimpleHttpServer {
     var server: HttpServer? = null
     var executor: Executor? = null
 
-    @JvmStatic
     fun stop() {
         // Request that the server stop accepting requests
         // and shut down.
@@ -39,6 +38,6 @@ fun main() {
         // Start the server.
         SimpleHttpServer.server?.start()
     } catch (t: Throwable) {
-        log.error(t.message, t)
+        logError(t)
     }
 }

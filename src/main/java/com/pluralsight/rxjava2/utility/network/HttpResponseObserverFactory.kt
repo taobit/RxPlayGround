@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets
 import java.time.Duration
 
 object HttpResponseObserverFactory {
-    @JvmStatic
     fun additionRequestResponseObservable(httpUri: URI): Observable<Int> {
         log.info("Creating observable for: {}", httpUri.toString())
         val httpClient = HttpClient.newBuilder()
@@ -23,8 +22,7 @@ object HttpResponseObserverFactory {
                 .build()
         val futureResponse = httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
         return Observable.fromFuture(futureResponse)
-                .map { obj: HttpResponse<String> -> obj.body() }
-                .map { s: String -> s.toInt() }
-                .doOnNext { responseInteger: Int? -> log.info("Response: {}", responseInteger) }
+                .map { it.body().toInt() }
+                .doOnNext { log.info("Response: {}", it) }
     }
 }

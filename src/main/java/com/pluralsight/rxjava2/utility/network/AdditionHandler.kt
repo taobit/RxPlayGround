@@ -9,6 +9,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class AdditionHandler : HttpHandler {
+
     @Throws(IOException::class)
     override fun handle(exchange: HttpExchange) {
 
@@ -20,17 +21,17 @@ class AdditionHandler : HttpHandler {
 
         // Parse the "a" parameter if provided.
         if (parameters.containsKey("a")) {
-            a = (parameters["a"] ?: error("")).toInt()
+            a = parameters.getValue("a").toInt()
         }
 
         // Parse the "b" parameter if provided.
         if (parameters.containsKey("b")) {
-            b = (parameters["b"] ?: error("")).toInt()
+            b = parameters.getValue("b").toInt()
         }
 
         // Parse the delay if provided.
         if (parameters.containsKey("delay")) {
-            delay = (parameters["delay"] ?: error("")).toInt()
+            delay = parameters.getValue("delay").toInt()
         }
 
         // Sleep for as long as the delay specifies.
@@ -41,13 +42,15 @@ class AdditionHandler : HttpHandler {
 
         // Set the response header indicating success (200) and how long
         // the response is going to be in bytes.
-        exchange.sendResponseHeaders(200, response.length.toLong())
+        with(exchange) {
+            sendResponseHeaders(200, response.length.toLong())
 
-        // Write out the response byte for byte.
-        exchange.responseBody.write(response.toByteArray())
+            // Write out the response byte for byte.
+            responseBody.write(response.toByteArray())
 
-        // Close the exchange.
-        exchange.close()
+            // Close the exchange.
+            close()
+        }
 
         // If the two numbers add up to -1, we are going to
         // request that the server shut down.

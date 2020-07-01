@@ -1,6 +1,7 @@
 package com.pluralsight.rxjava2.utility.events
 
-class NewCommentPostedEvent(private val authorEmail: String, private val commentorEmail: String, private val commentText: String) : EventBase() {
+class NewCommentPostedEvent(private val authorEmail: String,
+                            private val commentorEmail: String, private val commentText: String) : EventBase() {
 
     override fun toString(): String {
         return "NewCommentPostedEvent{" +
