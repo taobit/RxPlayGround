@@ -33,8 +33,8 @@ fun <T : Any> Observable<T>.simplySubscribe() = subscribeBy(
         onComplete = { log.info(OnComplete) }
 )
 
-fun GateBasedSynchronization.onError(e: Throwable) {
-    log.error("$this : ${e.message}")
+fun GateBasedSynchronization.onError(e: Throwable?) {
+    log.error("$this : ${e?.message}")
     openGate(OnError)
 }
 
